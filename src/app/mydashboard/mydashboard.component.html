@@ -1,0 +1,103 @@
+<nav class="navbar navbar-light bg-primary">
+  <div class="container-fluid">
+    <h1 style="color:aliceblue;">Liste des agents</h1>
+    <div class="d-flex">
+      <button type="button" data-toggle="modal" (click)="clickAdd()"
+        data-target="#exampleModal" class="btn btn-success">Add employer</button>
+    </div>
+  </div>
+</nav>
+<table class="table mt-3">
+  <thead>
+    <tr>
+      <th scope="col">Matricule</th>
+      <th scope="col">Prenom</th>
+      <th scope="col">Nom</th>
+      <th scope="col">Email</th>
+      <th scope="col">Adresse</th>
+      <th scope="col">Tel</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let row of employerData">
+      <td>{{row.id}}</td>
+      <td>{{row.prenom}}</td>
+      <td>{{row.nom}}</td>
+      <td>{{row.email}}</td>
+      <td>{{row.adresse}}</td>
+      <td>{{row.tel}}</td>
+      <td><button type="button" data-toggle="modal"
+          data-target="#exampleModal" (click)="onEdit(row)" class="btn
+          btn-info">Edit</button>
+        <button (click)="delEmployer(row)" class="btn btn-danger mx-3">Delete</button></td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+  aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ajout un employer</h5>
+        <button type="button" class="close" data-dismiss="modal"
+          aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formValue">
+          <div class="form-group">
+            <label for="exampleInputEmail1">Prenom</label>
+            <input type="text" formControlName="prenom"
+              class="form-control"
+              id="exampleInputEmail1" aria-describedby="emailHelp"
+              placeholder="Votre Prenom">
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail1">Nom</label>
+            <input type="text" formControlName="nom"
+              class="form-control"
+              id="exampleInputEmail1" aria-describedby="emailHelp"
+              placeholder="Votre Nom">
+          </div>
+          <div class="form-group">
+            <label for="exampleInputEmail1">Email</label>
+            <input type="text" class="form-control"
+              formControlName="email"
+              id="exampleInputEmail1" aria-describedby="emailHelp"
+              placeholder="Votre Email">
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail1">Adresse</label>
+            <input type="text" class="form-control"
+              formControlName="adresse"
+              id="exampleInputEmail1" aria-describedby="emailHelp"
+              placeholder="Votre Adresse">
+          </div>
+
+          <div class="form-group">
+            <label for="exampleInputEmail1">Tel</label>
+            <input type="text" class="form-control"
+              formControlName="tel"
+              id="exampleInputEmail1" aria-describedby="emailHelp"
+              placeholder="Votre Téléphone">
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="cancel" class="btn btn-secondary"
+          data-dismiss="modal">Fermer</button>
+        <button type="button" *ngIf="onAdd" class="btn btn-primary"
+          (click)="addEmployers()">Ajouter</button>
+        <button type="button" class="btn btn-primary" *ngIf="onUpdate"
+          (click)="updateEmployers()">Modifier</button>
+
+      </div>
+    </div>
+  </div>
+</div>
